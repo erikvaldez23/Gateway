@@ -20,10 +20,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Footer from "../key-components/Footer";
-import CallToAction from "../key-components/CallToAction";
-import Contact from "../key-components/Contact";
-import QuickLinks from "../key-components/QuickLinks";
+import Footer from "../global/Footer";
+import CallToAction from "../global/CallToAction";
+import Contact from "../global/Contact";
+import QuickLinks from "../global/QuickLinks";
 
 
 const faqConfig = {

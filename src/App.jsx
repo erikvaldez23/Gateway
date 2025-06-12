@@ -17,24 +17,18 @@ import ChatIcon from "@mui/icons-material/Chat";
 import "./App.css";
 
 // core components
-import Topbar from "./components/key-components/Topbar";
-import Footer from "./components/key-components/Footer";
-// import Loader from "./components/loader/Loader";
-import UpdatedLoader from "./components/loader/UpdatedLoader";
-import Chatbot from "./ChatBot";
-import RevealSection from "./components/animations/RevealSection";
-import VideoBackground from "./components/animations/VideoBackground";
-import SlideUpReveal from "./components/animations/SlideUpReveal";
-import OceanLoader from "./components/loader/Loader3";
+import Topbar from "./components/global/Topbar";
+import Topbar2 from "./components/global/Topbar2";
+import Footer from "./components/global/Footer";
 import LottieLoader from "./components/animations/LottieLoader";
+import Chatbot from "./ChatBot"
 
 // landing & sub-pages
 import Hero from "./components/hero/Hero";
-import WhatWeDo from "./components/landing/WhatWeDo";
-import WhyInvestWithUs from "./components/landing/WhyInvestWithUs";
-import CallToAction from "./components/key-components/CallToAction";
-import QuickLinks from "./components/key-components/QuickLinks";
-import Contact from "./components/key-components/Contact";
+import Hero2 from "./components/hero/Hero2";
+// import CallToAction from "./components/global/CallToAction";
+import QuickLinks from "./components/global/QuickLinks";
+// import Contact from "./components/global/Contact";
 import PrivacyPolicy from "./components/sub-pages/PrivacyPolicy";
 import Offer from "./components/sub-pages/Offer";
 import About from "./components/sub-pages/About";
@@ -43,10 +37,8 @@ import Portfolio from "./components/sub-pages/Portfolio";
 import Team from "./components/sub-pages/Team";
 import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
-import Dashboard from "./components/portfolio-dashboard/Dashboard"
-import Projects from "./components/portfolio-dashboard/portfolio-sub-pages/Proejcts";
-import SubPage1 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage1";
-import SubPage2 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage2";
+
+import Intro from "./components/landing/Intro"
 
 
 // theme
@@ -122,7 +114,7 @@ export default function App() {
           {/* <VideoBackground /> */}
         </Box>
 
-        {!loading && <Topbar handleOpenChatbot={handleOpenChatbot} />}
+        {!loading && <Topbar2 handleOpenChatbot={handleOpenChatbot} />}
 
         <>
           <Routes>
@@ -134,61 +126,29 @@ export default function App() {
                     <LottieLoader />
                   ) : (
                     <>
-                      {/* <Box
-                        sx={{
-                          position: "fixed",
-                          top: 0,
-                          left: 0,
-                          width: "100vw",
-                          height: "100vh",
-                          zIndex: 1,
-                        }}
-                      > */}
-                        <Hero loadingDone />
-                      {/* </Box> */}
-
-                      {/* <Box sx={{ height: "100vh" }} /> */}
-
-                      {/* <SlideUpReveal zIndex={2}> */}
-                        <WhatWeDo />
-                      {/* </SlideUpReveal> */}
-
-                      {/* <SlideUpReveal zIndex={3}> */}
-                        <WhyInvestWithUs />
-                      {/* </SlideUpReveal> */}
-
-                      {/* <SlideUpReveal zIndex={4}> */}
-                        <CallToAction />
-                      {/* </SlideUpReveal> */}
-
-                      {/* <SlideUpReveal zIndex={6}> */}
-                        <Contact />
-                      {/* </SlideUpReveal> */}
+                        <Hero2 loadingDone />
+                        <Intro />
+                        {/* <CallToAction /> */}
+                        {/* <Contact /> */}
                     </>
                   )}
                 </>
               }
             />
 
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/what-we-offer" element={<Offer />} />
             <Route path="/about" element={<About />} />
             <Route path="/how-it-works" element={<How />} />
             <Route path="/portfolio" element={<Dashboard />} />
             <Route path="/team" element={<Team />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<Contact />} /> */}
             <Route path="*" element={<NotFound />} />
 
 
-            {/* DASHBOARD SUB-PAGES */}
-            <Route path="/portfolio/overview" element={<NotFound />} />
-            <Route path="/portfolio/analytics" element={<NotFound />} />
-            <Route path="/portfolio/buildings" element={<Projects />} />
-            <Route path="/portfolio/sub-link1" element={<SubPage1 />} />
-            <Route path="/portfolio/sub-link1" element={<SubPage1 />} />
           </Routes>
 
-          {/* <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
+          <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
 
           {!chatbotOpen && (
             <Box
@@ -202,7 +162,7 @@ export default function App() {
               <IconButton
                 onClick={handleOpenChatbot}
                 sx={{
-                  backgroundColor: "#c9b49a",
+                  backgroundColor: "#111",
                   color: "white",
                   "&:hover": { backgroundColor: "#000" },
                   width: 70,
@@ -213,7 +173,7 @@ export default function App() {
                 <ChatIcon sx={{ fontSize: 40 }} />
               </IconButton>
             </Box>
-          )} */}
+          )}
 
           {!loading && <Footer />}
         </>

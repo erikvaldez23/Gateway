@@ -150,7 +150,7 @@ const Footer = () => {
               letterSpacing: { xs: '-2px', md: '-8px' },
             }}
           >
-            GREEN ARK
+            GATEWAY
           </StyledBrandText>
         </Fade>
 

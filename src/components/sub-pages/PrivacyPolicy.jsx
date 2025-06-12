@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Typography, Divider, Box } from "@mui/material";
-import CallToAction from "../key-components/CallToAction";
+import CallToAction from "../global/CallToAction";
 
 const PrivacyPolicy = () => {
   // ✅ Updated Privacy Policy Data Structure

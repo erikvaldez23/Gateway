@@ -17,7 +17,7 @@
     "@emotion/styled": "^11.14.0",
     "@fortawesome/fontawesome": "^1.1.8",
     "@lottiefiles/react-lottie-player": "^3.6.0",
-    "@mui/icons-material": "^6.4.8",
+    "@mui/icons-material": "^6.4.12",
     "@mui/material": "^6.4.2",
     "@react-three/drei": "^9.121.4",
     "@react-three/fiber": "^8.17.14",
