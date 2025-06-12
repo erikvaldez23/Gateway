@@ -93,7 +93,7 @@ const Topbar2 = () => {
                 key={item}
                 sx={{
                   color: "white",
-                  fontSize: "2.4rem",
+                  fontSize: "1.7rem",
                   fontWeight: 400,
                   textTransform: "none",
                   "&:hover": {

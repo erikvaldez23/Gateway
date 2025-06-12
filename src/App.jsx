@@ -39,6 +39,8 @@ import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
 import Intro from "./components/landing/Intro"
+import Intro2 from "./components/landing/Intro2"
+
 
 
 // theme
@@ -128,6 +130,7 @@ export default function App() {
                     <>
                         <Hero2 loadingDone />
                         <Intro />
+                        <Intro2 />
                         {/* <CallToAction /> */}
                         {/* <Contact /> */}
                     </>
@@ -148,7 +151,7 @@ export default function App() {
 
           </Routes>
 
-          <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
+          {!loading && <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />}
 
           {!chatbotOpen && (
             <Box

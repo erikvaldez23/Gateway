@@ -71,7 +71,7 @@ const Intro = () => {
   return (
     <Box
       sx={{
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        background: "linear-gradient(135deg, #142b52 0%, #1f3b70 100%)",
         py: 4,
       }}
     >
