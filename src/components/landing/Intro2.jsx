@@ -48,7 +48,8 @@ const FeaturedProjects = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box sx={{ px: 4, py: 6, background: "linear-gradient(135deg, #142b52 0%, #1f3b70 100%)",}}>
+    <Box sx={{background: "linear-gradient(135deg, #142b52 0%, #1f3b70 100%)"}}>
+    <Box sx={{py: 6, maxWidth: "1170px", mx: "auto"}}>
       <Grid container spacing={4} justifyContent="center">
         {featuredProjects.map((project, idx) => (
           <Grid item xs={12} md={6} key={idx}>
@@ -58,7 +59,7 @@ const FeaturedProjects = () => {
                 borderRadius: 4,
                 overflow: 'hidden',
                 position: 'relative',
-                height: 500,
+                height: 300,
                 cursor: 'pointer',
                 transition: 'transform 0.3s ease, filter 0.3s ease',
                 '&:hover': {
@@ -148,6 +149,7 @@ const FeaturedProjects = () => {
           </Grid>
         ))}
       </Grid>
+    </Box>
     </Box>
   );
 };

@@ -19,7 +19,8 @@ import {
   Search as SearchIcon,
   Language as LanguageIcon,
 } from "@mui/icons-material";
-import logo from "/Commercial-Development/gateway-logo.png";
+import logo from "/Commercial-Development/gateway-logo2.png";
+import { Link } from "react-router-dom";
 
 const Topbar2 = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -73,21 +74,53 @@ const Topbar2 = () => {
         boxShadow: "none",
       }}
     >
-      <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, md: 4 } }}>
+      <Toolbar
+        sx={{
+          justifyContent: "space-between",
+          px: { xs: 2, md: 4 },
+          position: "relative",
+        }}
+      >
         {/* Logo */}
-        <Box
-          component="img"
-          src={logo}
-          alt="Gateway Church Logo"
-          sx={{
-            height: { xs: 40, md: 100 }, // Adjust size as needed
-            objectFit: "contain",
-          }}
-        />
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <Box
+            component="img"
+            src={logo}
+            alt="Gateway Church Logo"
+            sx={{
+              height: { xs: 40, md: 100 },
+              objectFit: "contain",
+              mt: 1,
+            }}
+          />
+          <Box sx={{ lineHeight: 1, color: "white" }}>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 800, fontSize: "1.5rem" }}
+            >
+              Gateway
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 400, fontSize: "1.5rem" }}
+            >
+              Church
+            </Typography>
+          </Box>
+        </Box>
 
-        {/* Desktop Navigation */}
+        {/* Center Nav (absolutely centered) */}
         {!isMobile && (
-          <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
+          <Box
+            sx={{
+              position: "absolute",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: 3,
+              alignItems: "center",
+            }}
+          >
             {menuItems.map((item) => (
               <Button
                 key={item}
@@ -98,6 +131,7 @@ const Topbar2 = () => {
                   textTransform: "none",
                   "&:hover": {
                     backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    cursor: "pointer",
                   },
                 }}
               >
@@ -110,33 +144,11 @@ const Topbar2 = () => {
         {/* Right side - Search and Language */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           {/* Search */}
-          <Paper
-            component="form"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              borderRadius: "50px",
-              px: 1,
-              py: 0.5,
-              width: { xs: "120px", md: "200px" },
-            }}
-          >
-            <SearchIcon sx={{ color: "white", mr: 1 }} />
-            <InputBase
-              placeholder="SEARCH"
-              sx={{
-                color: "white",
-                fontSize: "0.8rem",
-                "& .MuiInputBase-input::placeholder": {
-                  color: "rgba(255, 255, 255, 0.7)",
-                  opacity: 1,
-                },
-              }}
-            />
-          </Paper>
-
+          <Link to="/search">
+            <IconButton sx={{ color: "white" }}>
+              <SearchIcon />
+            </IconButton>
+          </Link>
           {/* Language Selector */}
           <Button
             onClick={handleLangMenuOpen}
@@ -169,7 +181,7 @@ const Topbar2 = () => {
               EN
             </MenuItem>
             <MenuItem onClick={handleLangMenuClose} sx={{ color: "white" }}>
-              DE
+              ES
             </MenuItem>
           </Menu>
 

@@ -100,16 +100,33 @@ return (
                 py: 1.5,
                 fontSize: '1rem',
                 textTransform: 'none',
-                borderRadius: '4px',
+                borderRadius: 5,
                 '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.5)',
                 }
               }}
             >
               CONNECT WITH US
             </Button>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: 'white',
+                color: 'black',
+                px: 4,
+                py: 1.5,
+                fontSize: '1rem',
+                textTransform: 'none',
+                borderRadius: 5,
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                }
+              }}
+            >
+              ASK A QUESTION
+            </Button>
 
-            <Typography
+            {/* <Typography
               variant="body2"
               sx={{
                 color: 'rgba(255, 255, 255, 0.7)',
@@ -131,7 +148,7 @@ return (
                   display: 'inline-block'
                 }}
               />
-            </Typography>
+            </Typography> */}
           </Box>
         </Box>
       </Container>

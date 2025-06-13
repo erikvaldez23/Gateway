@@ -20,7 +20,6 @@ import "./App.css";
 import Topbar from "./components/global/Topbar";
 import Topbar2 from "./components/global/Topbar2";
 import Footer from "./components/global/Footer";
-import LottieLoader from "./components/animations/LottieLoader";
 import Chatbot from "./ChatBot"
 
 // landing & sub-pages
@@ -29,17 +28,13 @@ import Hero2 from "./components/hero/Hero2";
 // import CallToAction from "./components/global/CallToAction";
 import QuickLinks from "./components/global/QuickLinks";
 // import Contact from "./components/global/Contact";
-import PrivacyPolicy from "./components/sub-pages/PrivacyPolicy";
-import Offer from "./components/sub-pages/Offer";
-import About from "./components/sub-pages/About";
-import How from "./components/sub-pages/How";
-import Portfolio from "./components/sub-pages/Portfolio";
-import Team from "./components/sub-pages/Team";
+// import PrivacyPolicy from "./components/sub-pages/PrivacyPolicy";
 import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
 import Intro from "./components/landing/Intro"
 import Intro2 from "./components/landing/Intro2"
+import Chat from "./components/sub-pages/Chat";
 
 
 
@@ -116,7 +111,7 @@ export default function App() {
           {/* <VideoBackground /> */}
         </Box>
 
-        {!loading && <Topbar2 handleOpenChatbot={handleOpenChatbot} />}
+        <Topbar2 handleOpenChatbot={handleOpenChatbot} />
 
         <>
           <Routes>
@@ -124,17 +119,13 @@ export default function App() {
               path="/"
               element={
                 <>
-                  {loading ? (
-                    <LottieLoader />
-                  ) : (
                     <>
-                        <Hero2 loadingDone />
+                        <Hero2 />
                         <Intro />
                         <Intro2 />
                         {/* <CallToAction /> */}
                         {/* <Contact /> */}
                     </>
-                  )}
                 </>
               }
             />
@@ -146,6 +137,7 @@ export default function App() {
             <Route path="/portfolio" element={<Dashboard />} />
             <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} /> */}
+            <Route path="/chat" element={<Chat />} />
             <Route path="*" element={<NotFound />} />
 
 
@@ -168,17 +160,17 @@ export default function App() {
                   backgroundColor: "#111",
                   color: "white",
                   "&:hover": { backgroundColor: "#000" },
-                  width: 70,
-                  height: 70,
+                  width: 50,
+                  height: 50,
                   boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
                 }}
               >
-                <ChatIcon sx={{ fontSize: 40 }} />
+                <ChatIcon sx={{ fontSize: 28 }} />
               </IconButton>
             </Box>
           )}
 
-          {!loading && <Footer />}
+          {!location.hash.includes('#/chat') && <Footer />}
         </>
       </Router>
     </ThemeProvider>
