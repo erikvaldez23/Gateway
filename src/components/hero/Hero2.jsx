@@ -19,6 +19,8 @@ import {
   Search as SearchIcon,
   Language as LanguageIcon
 } from '@mui/icons-material';
+import AppleAIPopup from './Popup';
+
 
 const Hero2 = () => {
 return (
@@ -26,7 +28,6 @@ return (
   sx={{
     position: 'relative',
     height: '100vh',
-    overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -152,6 +153,7 @@ return (
           </Box>
         </Box>
       </Container>
+            <AppleAIPopup />
     </Box>
   );
 };

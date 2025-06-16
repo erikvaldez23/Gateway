@@ -161,7 +161,6 @@ const SuggestedPrompts = ({ onPromptClick }) => {
               fontSize: "1rem",
               "&:hover": {
                 backgroundColor: "primary.main",
-                color: "black",
               },
               mb: 1,
             }}
@@ -399,7 +398,7 @@ export default function Chat() {
               disabled={!inputValue.trim() || isTyping}
               sx={{
                 bgcolor: inputValue.trim() ? "primary.main" : "action.disabled",
-                color: inputValue.trim() ? "black" : "text.disabled",
+                color: inputValue.trim() ? "#fff" : "text.disabled",
                 "&:hover": {
                   bgcolor: inputValue.trim()
                     ? "primary.dark"

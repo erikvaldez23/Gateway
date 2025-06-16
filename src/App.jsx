@@ -37,11 +37,10 @@ import Intro2 from "./components/landing/Intro2"
 import Chat from "./components/sub-pages/Chat";
 
 
-
 // theme
 const theme = createTheme({
   palette: {
-    primary: { main: "#c9b49a" },
+    primary: { main: "#1f3b70" },
   },
 });
 
@@ -157,7 +156,7 @@ export default function App() {
               <IconButton
                 onClick={handleOpenChatbot}
                 sx={{
-                  backgroundColor: "#111",
+                  backgroundColor: "#142b52",
                   color: "white",
                   "&:hover": { backgroundColor: "#000" },
                   width: 50,
