@@ -156,11 +156,11 @@ export default function App() {
               <IconButton
                 onClick={handleOpenChatbot}
                 sx={{
-                  backgroundColor: "#142b52",
+                  backgroundColor: "#1f3b70",
                   color: "white",
                   "&:hover": { backgroundColor: "#000" },
-                  width: 50,
-                  height: 50,
+                  width: 60,
+                  height: 60,
                   boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
                 }}
               >

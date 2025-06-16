@@ -280,6 +280,7 @@ export default function Chat() {
               <Avatar
                 sx={{
                   bgcolor: "primary.main",
+                  color: "#fff",
                   width: 64,
                   height: 64,
                   mb: 2,
