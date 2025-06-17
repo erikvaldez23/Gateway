@@ -68,6 +68,16 @@ export default function App() {
   const [pageLoaded, setPageLoaded] = useState(false);
   const [animationDone, setAnimationDone] = useState(false);
 
+  const [hash, setHash] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setHash(window.location.hash);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const loading = !(pageLoaded && animationDone);
 
   const handleOpenChatbot = () => setChatbotOpen(true);
@@ -169,7 +179,7 @@ export default function App() {
             </Box>
           )}
 
-          {!location.hash.includes('#/chat') && <Footer />}
+             {!hash.includes('#/chat') && <Footer />}
         </>
       </Router>
     </ThemeProvider>
