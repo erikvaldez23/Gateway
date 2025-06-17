@@ -105,7 +105,7 @@ const ChatMessage = ({ message, isUser, timestamp }) => {
             variant="body1" 
             sx={{ 
               lineHeight: 1.5,
-              fontSize: isMobile ? '0.9em' : '1em',
+              fontSize: isMobile ? '0.9em' : '1.2em',
             }}
           >
             {message}
@@ -287,8 +287,8 @@ export default function Chat() {
         sx={{
           position: "relative",
           height: "100vh",
-          height: "100dvh", // Use dynamic viewport height for mobile
-          pt: isMobile ? 2 : 10,
+          height: "100dvh",
+          pt: isMobile ? 8 : 10,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -423,7 +423,7 @@ export default function Chat() {
           elevation={2}
           sx={{
             position: "fixed",
-            bottom: isMobile ? 0 : 20,
+            bottom: isMobile ? 5 : 20,
             left: 0,
             right: 0,
             width: "100%",
@@ -432,7 +432,7 @@ export default function Chat() {
             p: isMobile ? 1 : 1,
             bgcolor: "background.paper",
             borderTop: `1px solid ${theme.palette.divider}`,
-            borderRadius: isMobile ? 0 : 50,
+            borderRadius: isMobile ? 50 : 50,
             // Safe area padding for mobile
             paddingBottom: isMobile ? "calc(1rem + env(safe-area-inset-bottom))" : "1rem",
             // Prevent input zoom on mobile
@@ -454,7 +454,7 @@ export default function Chat() {
                 sx: {
                   px: isMobile ? 1.5 : 2,
                   py: 1,
-                  fontSize: isMobile ? "16px" : "1rem", // Prevent zoom on iOS
+                  fontSize: isMobile ? "16px" : "1.2rem", // Prevent zoom on iOS
                   display: "flex",
                   alignItems: "center",
                   minHeight: isMobile ? "44px" : "48px", // Touch target size

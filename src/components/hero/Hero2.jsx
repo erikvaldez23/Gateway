@@ -20,7 +20,7 @@ import {
   Language as LanguageIcon
 } from '@mui/icons-material';
 import AppleAIPopup from './Popup';
-import Video from "../../assets/bg.mp4"
+import video from "../../../public/bg.mp4"
 
 
 const Hero2 = () => {
@@ -50,7 +50,7 @@ return (
       zIndex: 0,
     }}
   >
-    <source src={Video} type="video/mp4" />
+    <source src={video} type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 

@@ -46,48 +46,54 @@ const Topbar2 = () => {
   const location = useLocation();
 
   // Memoized dropdown items to prevent unnecessary re-renders
-  const dropdownItems = useMemo(() => ({
-    MINISTRIES: [
-      "Business Leaders",
-      "Gateway Espanol",
-      "Global Outreach",
-      "Jewish",
-      "Kids",
-      "Marriage",
-      "Men",
-      "Outreach",
-      "Primetime",
-      "Prison Ministry",
-      "Single Parent Families",
-      "Widows",
-      "Women",
-      "Worship",
-      "Young Adults",
-      "Youth",
-    ],
-    CONNECT: [
-      "Growth Path",
-      "Groups",
-      "Equip Classes",
-      "Volunteer Team",
-      "Membership",
-      "Prayer",
-      "Care",
-      "Plan Your Visit",
-    ],
-  }), []);
+  const dropdownItems = useMemo(
+    () => ({
+      MINISTRIES: [
+        "Business Leaders",
+        "Gateway Espanol",
+        "Global Outreach",
+        "Jewish",
+        "Kids",
+        "Marriage",
+        "Men",
+        "Outreach",
+        "Primetime",
+        "Prison Ministry",
+        "Single Parent Families",
+        "Widows",
+        "Women",
+        "Worship",
+        "Young Adults",
+        "Youth",
+      ],
+      CONNECT: [
+        "Growth Path",
+        "Groups",
+        "Equip Classes",
+        "Volunteer Team",
+        "Membership",
+        "Prayer",
+        "Care",
+        "Plan Your Visit",
+      ],
+    }),
+    []
+  );
 
   // Memoized menu items with proper routing
-  const menuItems = useMemo(() => [
-    { label: "ABOUT", path: "/about" },
-    { label: "WATCH", path: "/watch" },
-    { label: "GIVE", path: "/give" },
-    { label: "LOCATIONS", path: "/locations" },
-    { label: "CONNECT", path: "/connect", hasDropdown: true },
-    { label: "MINISTRIES", path: "/ministries", hasDropdown: true },
-    { label: "EVENTS", path: "/events" },
-    { label: "CHAT", path: "/chat" },
-  ], []);
+  const menuItems = useMemo(
+    () => [
+      { label: "ABOUT", path: "/about" },
+      { label: "WATCH", path: "/watch" },
+      { label: "GIVE", path: "/give" },
+      { label: "LOCATIONS", path: "/locations" },
+      { label: "CONNECT", path: "/connect", hasDropdown: true },
+      { label: "MINISTRIES", path: "/ministries", hasDropdown: true },
+      { label: "EVENTS", path: "/events" },
+      { label: "CHAT", path: "/chat" },
+    ],
+    []
+  );
 
   // Throttled scroll handler for better performance
   const handleScroll = useCallback(() => {
@@ -121,12 +127,12 @@ const Topbar2 = () => {
   // Prevent scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [mobileMenuOpen]);
 
@@ -146,33 +152,43 @@ const Topbar2 = () => {
     setLangAnchorEl(null);
   }, []);
 
-  const handleLanguageChange = useCallback((lang) => {
-    setCurrentLanguage(lang);
-    handleLangMenuClose();
-  }, [handleLangMenuClose]);
+  const handleLanguageChange = useCallback(
+    (lang) => {
+      setCurrentLanguage(lang);
+      handleLangMenuClose();
+    },
+    [handleLangMenuClose]
+  );
 
   const toggleMobileMenu = useCallback(() => {
-    setMobileMenuOpen(prev => !prev);
+    setMobileMenuOpen((prev) => !prev);
   }, []);
 
   const handleMobileMenuItemClick = useCallback((item) => {
     if (item.hasDropdown) {
-      setExpandedMobileMenu(prev => prev === item.label ? null : item.label);
+      setExpandedMobileMenu((prev) =>
+        prev === item.label ? null : item.label
+      );
     } else {
       setMobileMenuOpen(false);
     }
   }, []);
 
-  const isActiveRoute = useCallback((path) => {
-    return location.pathname === path;
-  }, [location.pathname]);
+  const isActiveRoute = useCallback(
+    (path) => {
+      return location.pathname === path;
+    },
+    [location.pathname]
+  );
 
   return (
     <>
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: scrolled ? "rgba(0, 0, 0, 0.95)" : "rgba(0, 0, 0, 0.0)",
+          backgroundColor: scrolled
+            ? "rgba(0, 0, 0, 0.95)"
+            : "rgba(0, 0, 0, 0.0)",
           backdropFilter: scrolled ? "blur(15px)" : "none",
           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
@@ -189,7 +205,15 @@ const Topbar2 = () => {
         >
           {/* Logo */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Link to="/" style={{ display: "flex", alignItems: "center", gap: 16, textDecoration: "none" }}>
+            <Link
+              to="/"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 16,
+                textDecoration: "none",
+              }}
+            >
               <Box
                 component="img"
                 src={logo}
@@ -206,8 +230,8 @@ const Topbar2 = () => {
               <Box sx={{ lineHeight: 1, color: "white" }}>
                 <Typography
                   variant="h6"
-                  sx={{ 
-                    fontWeight: 800, 
+                  sx={{
+                    fontWeight: 800,
                     fontSize: { xs: "1.2rem", md: "1.5rem" },
                     letterSpacing: "0.5px",
                   }}
@@ -216,8 +240,8 @@ const Topbar2 = () => {
                 </Typography>
                 <Typography
                   variant="h6"
-                  sx={{ 
-                    fontWeight: 400, 
+                  sx={{
+                    fontWeight: 400,
                     fontSize: { xs: "1.2rem", md: "1.5rem" },
                     letterSpacing: "0.5px",
                   }}
@@ -244,7 +268,9 @@ const Topbar2 = () => {
                 <Box
                   key={item.label}
                   onMouseEnter={() =>
-                    item.hasDropdown ? setHoveredMenu(item.label) : setHoveredMenu(null)
+                    item.hasDropdown
+                      ? setHoveredMenu(item.label)
+                      : setHoveredMenu(null)
                   }
                   onMouseLeave={() => setHoveredMenu(null)}
                   sx={{ position: "relative" }}
@@ -253,8 +279,10 @@ const Topbar2 = () => {
                     component={item.hasDropdown ? "button" : Link}
                     to={item.hasDropdown ? undefined : item.path}
                     sx={{
-                      color: isActiveRoute(item.path) ? theme.palette.primary.main : "white",
-                      fontSize: "1.3rem",
+                      color: isActiveRoute(item.path)
+                        ? theme.palette.primary.main
+                        : "white",
+                      fontSize: "1.4rem",
                       fontWeight: isActiveRoute(item.path) ? 600 : 400,
                       textTransform: "none",
                       display: "flex",
@@ -268,17 +296,19 @@ const Topbar2 = () => {
                         backgroundColor: "rgba(255, 255, 255, 0.1)",
                         transform: "translateY(-1px)",
                       },
-                      "&::after": isActiveRoute(item.path) ? {
-                        content: '""',
-                        position: "absolute",
-                        bottom: -4,
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        width: "60%",
-                        height: 2,
-                        backgroundColor: theme.palette.primary.main,
-                        borderRadius: 1,
-                      } : {},
+                      "&::after": isActiveRoute(item.path)
+                        ? {
+                            content: '""',
+                            position: "absolute",
+                            bottom: -4,
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            width: "60%",
+                            height: 2,
+                            backgroundColor: theme.palette.primary.main,
+                            borderRadius: 1,
+                          }
+                        : {},
                       transition: "all 0.2s ease",
                     }}
                   >
@@ -288,7 +318,10 @@ const Topbar2 = () => {
                         sx={{
                           fontSize: "1.2rem",
                           ml: 0.5,
-                          transform: hoveredMenu === item.label ? "rotate(180deg)" : "rotate(0deg)",
+                          transform:
+                            hoveredMenu === item.label
+                              ? "rotate(180deg)"
+                              : "rotate(0deg)",
                           transition: "transform 0.2s ease",
                         }}
                       />
@@ -297,50 +330,53 @@ const Topbar2 = () => {
 
                   {/* Dropdown Menu */}
                   <AnimatePresence>
-                    {hoveredMenu === item.label && dropdownItems[item.label] && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
-                        style={{
-                          position: "absolute",
-                          top: "100%",
-                          transform: "translateX(-50%)",
-                          marginTop: 8,
-                          background: "rgba(255, 255, 255, 0.95)",
-                          backdropFilter: "blur(20px)",
-                          borderRadius: 12,
-                          minWidth: 220,
-                          boxShadow: "0 12px 40px rgba(0,0,0,0.15)",
-                          zIndex: 1000,
-                          border: "1px solid rgba(255,255,255,0.2)",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {dropdownItems[item.label].map((subItem, index) => (
-                          <MenuItem
-                            key={subItem}
-                            onClick={() => setHoveredMenu(null)}
-                            sx={{
-                              color: "rgba(0,0,0,0.8)",
-                              fontWeight: 400,
-                              fontSize: "0.95rem",
-                              py: 1.5,
-                              px: 2,
-                              borderBottom: index < dropdownItems[item.label].length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
-                              "&:hover": {
-                                backgroundColor: "rgba(0,0,0,0.05)",
-                                color: theme.palette.primary.main,
-                              },
-                              transition: "all 0.2s ease",
-                            }}
-                          >
-                            {subItem}
-                          </MenuItem>
-                        ))}
-                      </motion.div>
-                    )}
+                    {hoveredMenu === item.label &&
+                      dropdownItems[item.label] && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                          style={{
+                            position: "absolute",
+                            top: "100%",
+                            transform: "translateX(-50%)",
+                            marginTop: 8,
+                            background: "rgba(255, 255, 255, 0.2)",
+                            backdropFilter: "blur(10px)",
+                            borderRadius: 12,
+                            minWidth: 220,
+                            boxShadow: "0 12px 40px rgba(0,0,0,0.15)",
+                            zIndex: 1000,
+                            overflow: "hidden",
+                          }}
+                        >
+                          {dropdownItems[item.label].map((subItem, index) => (
+                            <MenuItem
+                              key={subItem}
+                              onClick={() => setHoveredMenu(null)}
+                              sx={{
+                                color: "#fff",
+                                fontWeight: 400,
+                                fontSize: "1.3rem",
+                                py: 1.5,
+                                px: 2,
+                                borderBottom:
+                                  index < dropdownItems[item.label].length - 1
+                                    ? "1px solid rgba(0,0,0,0.05)"
+                                    : "none",
+                                "&:hover": {
+                                  backgroundColor: "rgba(0,0,0,0.4)",
+                                  color: "#fff",
+                                },
+                                transition: "all 0.2s ease",
+                              }}
+                            >
+                              {subItem}
+                            </MenuItem>
+                          ))}
+                        </motion.div>
+                      )}
                   </AnimatePresence>
                 </Box>
               ))}
@@ -350,10 +386,10 @@ const Topbar2 = () => {
           {/* Right side - Search and Language */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             {/* Search */}
-            <IconButton 
-              component={Link} 
+            <IconButton
+              component={Link}
               to="/search"
-              sx={{ 
+              sx={{
                 color: "white",
                 "&:hover": {
                   backgroundColor: "rgba(255, 255, 255, 0.1)",
@@ -412,7 +448,10 @@ const Topbar2 = () => {
                     color: "rgba(0,0,0,0.8)",
                     fontSize: "0.9rem",
                     fontWeight: currentLanguage === lang ? 600 : 400,
-                    backgroundColor: currentLanguage === lang ? "rgba(0,0,0,0.05)" : "transparent",
+                    backgroundColor:
+                      currentLanguage === lang
+                        ? "rgba(0,0,0,0.05)"
+                        : "transparent",
                     "&:hover": {
                       backgroundColor: "rgba(0,0,0,0.1)",
                     },
@@ -425,10 +464,10 @@ const Topbar2 = () => {
 
             {/* Mobile Menu Button */}
             {isMobile && (
-              <IconButton 
-                color="inherit" 
+              <IconButton
+                color="inherit"
                 onClick={toggleMobileMenu}
-                sx={{ 
+                sx={{
                   ml: 1,
                   "&:hover": {
                     backgroundColor: "rgba(255, 255, 255, 0.1)",
@@ -482,20 +521,27 @@ const Topbar2 = () => {
                         },
                       }}
                     >
-                      <ListItemText 
+                      <ListItemText
                         primary={item.label}
                         primaryTypographyProps={{
                           fontSize: "1.2rem",
                           fontWeight: 500,
                         }}
                       />
-                      {item.hasDropdown && (
-                        expandedMobileMenu === item.label ? <ExpandLess /> : <ExpandMore />
-                      )}
+                      {item.hasDropdown &&
+                        (expandedMobileMenu === item.label ? (
+                          <ExpandLess />
+                        ) : (
+                          <ExpandMore />
+                        ))}
                     </ListItem>
-                    
+
                     {item.hasDropdown && (
-                      <Collapse in={expandedMobileMenu === item.label} timeout="auto" unmountOnExit>
+                      <Collapse
+                        in={expandedMobileMenu === item.label}
+                        timeout="auto"
+                        unmountOnExit
+                      >
                         <List component="div" disablePadding>
                           {dropdownItems[item.label]?.map((subItem) => (
                             <ListItem
@@ -510,7 +556,7 @@ const Topbar2 = () => {
                                 },
                               }}
                             >
-                              <ListItemText 
+                              <ListItemText
                                 primary={subItem}
                                 primaryTypographyProps={{
                                   fontSize: "1rem",

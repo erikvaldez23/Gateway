@@ -20,7 +20,7 @@ import "./App.css";
 import Topbar from "./components/global/Topbar";
 import Topbar2 from "./components/global/Topbar2";
 import Footer from "./components/global/Footer";
-import Chatbot from "./ChatBot"
+import Chatbot from "./ChatBot";
 
 // landing & sub-pages
 import Hero from "./components/hero/Hero";
@@ -32,10 +32,9 @@ import QuickLinks from "./components/global/QuickLinks";
 import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
-import Intro from "./components/landing/Intro"
-import Intro2 from "./components/landing/Intro2"
+import Intro from "./components/landing/Intro";
+import Intro2 from "./components/landing/Intro2";
 import Chat from "./components/sub-pages/Chat";
-
 
 // theme
 const theme = createTheme({
@@ -74,8 +73,8 @@ export default function App() {
     const handleHashChange = () => {
       setHash(window.location.hash);
     };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
   const loading = !(pageLoaded && animationDone);
@@ -128,13 +127,13 @@ export default function App() {
               path="/"
               element={
                 <>
-                    <>
-                        <Hero2 />
-                        <Intro />
-                        <Intro2 />
-                        {/* <CallToAction /> */}
-                        {/* <Contact /> */}
-                    </>
+                  <>
+                    <Hero2 />
+                    <Intro />
+                    <Intro2 />
+                    {/* <CallToAction /> */}
+                    {/* <Contact /> */}
+                  </>
                 </>
               }
             />
@@ -148,13 +147,13 @@ export default function App() {
             <Route path="/contact" element={<Contact />} /> */}
             <Route path="/chat" element={<Chat />} />
             <Route path="*" element={<NotFound />} />
-
-
           </Routes>
 
-          {!loading && <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />}
+          {!loading && !hash.includes("#/chat") && (
+            <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
+          )}
 
-          {!chatbotOpen && (
+          {!chatbotOpen && !hash.includes("#/chat") && (
             <Box
               sx={{
                 position: "fixed",
@@ -179,7 +178,7 @@ export default function App() {
             </Box>
           )}
 
-             {!hash.includes('#/chat') && <Footer />}
+          {!hash.includes("#/chat") && <Footer />}
         </>
       </Router>
     </ThemeProvider>
