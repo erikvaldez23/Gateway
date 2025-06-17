@@ -28,7 +28,7 @@ import {
   ExpandLess,
   ExpandMore,
 } from "@mui/icons-material";
-import logo from "/Gateway/gateway-logo2.png";
+import logo from "../../../public/gateway-logo2.png";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
