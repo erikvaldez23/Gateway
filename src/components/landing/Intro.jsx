@@ -34,7 +34,7 @@ const Intro = () => {
     date: "June 7, 2025",
     description:
       "Is the Holy Spirit still at work today? Dr. Megan Fate Marshman continues our Empowered series with a powerful reminder that God hasn't left us—He's still moving. Through the story of Pentecost, we see that the same Holy Spirit who filled and empowered the early Church is still present today—calling, equipping, and transforming lives!",
-    image: "/Commercial-Development/intro/maxresdefault.jpg",
+    image: "/Gateway/intro/maxresdefault.jpg",
     isLive: false,
   };
 
@@ -44,7 +44,7 @@ const Intro = () => {
       title: "Visiting Gateway?",
       description:
         "We can't wait to welcome you in person or online! Information is available to answer questions ahead of time about your visit so you can feel at home right away.",
-      image: "/Commercial-Development/intro/visit.jpg",
+      image: "/Gateway/intro/visit.jpg",
       action: "Plan your visit",
       color: "#667eea",
     },
@@ -53,7 +53,7 @@ const Intro = () => {
       title: "Weekend Children's Ministry",
       description:
         "Children's ministry (birth through sixth grade) is available at all campuses during weekend services, and registration is not required.",
-      image: "/Commercial-Development/intro/kids-registration.jpg",
+      image: "/Gateway/intro/kids-registration.jpg",
       action: "Learn more about Gateway Kids",
       color: "#764ba2",
     },
@@ -62,7 +62,7 @@ const Intro = () => {
       title: "Let's Connect!",
       description:
         "Are you looking for meaningful ways to connect with others in the Gateway family? There are resources available to help you find a group, host a weekend sermon watch party, or dive deeper in your personal relationship with Jesus.",
-      image: "/Commercial-Development/intro/Connect-card.jpg",
+      image: "/Gateway/intro/Connect-card.jpg",
       action: "Learn more",
       color: "#f093fb",
     },

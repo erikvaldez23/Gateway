@@ -17,6 +17,7 @@ import {
   CssBaseline,
   Divider,
   Stack,
+  useMediaQuery,
 } from "@mui/material";
 import {
   Send as SendIcon,
@@ -34,7 +35,7 @@ const darkTheme = createTheme({
       paper: "#2d2d2d",
     },
     primary: {
-      main: "#1f3b70", // ← Changed from green to navy blue
+      main: "#1f3b70",
     },
     text: {
       primary: "#ffffff",
@@ -55,9 +56,9 @@ const darkTheme = createTheme({
   },
 });
 
-
 const ChatMessage = ({ message, isUser, timestamp }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Fade in={true} timeout={300}>
@@ -65,47 +66,57 @@ const ChatMessage = ({ message, isUser, timestamp }) => {
         sx={{
           display: "flex",
           justifyContent: isUser ? "flex-end" : "flex-start",
-          mb: 2,
+          mb: isMobile ? 1.5 : 2,
           alignItems: "flex-start",
-          gap: 1,
+          gap: isMobile ? 0.5 : 1,
+          px: isMobile ? 1 : 0,
         }}
       >
         {!isUser && (
           <Avatar
             sx={{
               bgcolor: theme.palette.primary.main,
-              width: 32,
-              height: 32,
+              width: isMobile ? 28 : 32,
+              height: isMobile ? 28 : 32,
               mt: 0.5,
+              flexShrink: 0,
             }}
           >
-            <BotIcon sx={{ fontSize: 18 }} />
+            <BotIcon sx={{ fontSize: isMobile ? 16 : 18 }} />
           </Avatar>
         )}
 
         <Paper
           elevation={1}
           sx={{
-            px: 2,
-            py: 1.5,
-            maxWidth: "70%",
+            px: isMobile ? 1.5 : 2,
+            py: isMobile ? 1 : 1.5,
+            maxWidth: isMobile ? "85%" : "70%",
             bgcolor: isUser
               ? theme.palette.primary.main
-              : theme.palette.background.paper,
+              : "theme.palette.background.paper",
             color: isUser ? "#fff" : theme.palette.text.primary,
-            borderRadius: 2,
+            borderRadius: isMobile ? 1.5 : 2,
             border: `1px solid ${theme.palette.divider}`,
+            wordBreak: "break-word",
           }}
         >
-          <Typography variant="body1" sx={{ lineHeight: 1.5 }}>
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              lineHeight: 1.5,
+              fontSize: isMobile ? '0.9em' : '1em',
+            }}
+          >
             {message}
           </Typography>
           <Typography
             variant="caption"
             sx={{
-              color: isUser ? "#fff" : "#fff",
+              color: isUser ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.6)",
               mt: 0.5,
               display: "block",
+              fontSize: isMobile ? '0.7em' : '0.75em',
             }}
           >
             {timestamp}
@@ -116,12 +127,13 @@ const ChatMessage = ({ message, isUser, timestamp }) => {
           <Avatar
             sx={{
               bgcolor: theme.palette.grey[600],
-              width: 32,
-              height: 32,
+              width: isMobile ? 28 : 32,
+              height: isMobile ? 28 : 32,
               mt: 0.5,
+              flexShrink: 0,
             }}
           >
-            <UserIcon sx={{ fontSize: 18 }} />
+            <UserIcon sx={{ fontSize: isMobile ? 16 : 18 }} />
           </Avatar>
         )}
       </Box>
@@ -130,6 +142,9 @@ const ChatMessage = ({ message, isUser, timestamp }) => {
 };
 
 const SuggestedPrompts = ({ onPromptClick }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  
   const prompts = [
     "What can you help me with?",
     "When are services?",
@@ -138,10 +153,15 @@ const SuggestedPrompts = ({ onPromptClick }) => {
   ];
 
   return (
-    <Box sx={{ mb: 3 }}>
+    <Box sx={{ mb: 3, px: isMobile ? 2 : 0 }}>
       <Typography
-        variant="h6"
-        sx={{ mb: 2, textAlign: "center", opacity: 0.8 }}
+        variant={isMobile ? "h6" : "h6"}
+        sx={{ 
+          mb: 2, 
+          textAlign: "center", 
+          opacity: 0.8,
+          fontSize: isMobile ? '1.1em' : '1.25em',
+        }}
       >
         Try asking me about:
       </Typography>
@@ -150,6 +170,7 @@ const SuggestedPrompts = ({ onPromptClick }) => {
         spacing={1}
         flexWrap="wrap"
         justifyContent="center"
+        sx={{ gap: isMobile ? 0.5 : 1 }}
       >
         {prompts.map((prompt, index) => (
           <Chip
@@ -158,7 +179,12 @@ const SuggestedPrompts = ({ onPromptClick }) => {
             onClick={() => onPromptClick(prompt)}
             sx={{
               cursor: "pointer",
-              fontSize: "1rem",
+              fontSize: isMobile ? "0.8rem" : "1rem",
+              height: isMobile ? 32 : 'auto',
+              "& .MuiChip-label": {
+                px: isMobile ? 1 : 1.5,
+                py: isMobile ? 0.5 : 1,
+              },
               "&:hover": {
                 backgroundColor: "primary.main",
               },
@@ -177,6 +203,7 @@ export default function Chat() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -185,6 +212,18 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Prevent zoom on input focus for iOS
+  useEffect(() => {
+    if (isMobile) {
+      const viewport = document.querySelector("meta[name=viewport]");
+      if (viewport) {
+        viewport.setAttribute("content", 
+          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        );
+      }
+    }
+  }, [isMobile]);
 
   const handleSend = async () => {
     if (!inputValue.trim()) return;
@@ -248,10 +287,12 @@ export default function Chat() {
         sx={{
           position: "relative",
           height: "100vh",
-          pt: 10,
+          height: "100dvh", // Use dynamic viewport height for mobile
+          pt: isMobile ? 2 : 10,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          overflow: "hidden", // Prevent body scroll on mobile
         }}
       >
         {/* Scrollable Chat Container */}
@@ -259,11 +300,13 @@ export default function Chat() {
           sx={{
             flex: 1,
             width: "100%",
-            maxWidth: "md",
+            maxWidth: isMobile ? "100%" : "md",
             overflowY: "auto",
-            px: 2,
+            px: isMobile ? 0 : 2,
             pb: 2,
-            mb: 8, // space for fixed input
+            mb: isMobile ? 10 : 8, // More space for mobile keyboard
+            // Momentum scrolling for iOS
+            WebkitOverflowScrolling: "touch",
           }}
         >
           {messages.length === 0 ? (
@@ -275,23 +318,38 @@ export default function Chat() {
                 justifyContent: "center",
                 height: "100%",
                 textAlign: "center",
+                px: isMobile ? 2 : 0,
               }}
             >
               <Avatar
                 sx={{
                   bgcolor: "primary.main",
                   color: "#fff",
-                  width: 64,
-                  height: 64,
+                  width: isMobile ? 48 : 64,
+                  height: isMobile ? 48 : 64,
                   mb: 2,
                 }}
               >
-                <BotIcon sx={{ fontSize: 32 }} />
+                <BotIcon sx={{ fontSize: isMobile ? 24 : 32 }} />
               </Avatar>
-              <Typography variant="h4" sx={{ mb: 1, fontWeight: 600 }}>
+              <Typography 
+                variant={isMobile ? "h5" : "h4"} 
+                sx={{ 
+                  mb: 1, 
+                  fontWeight: 600,
+                  fontSize: isMobile ? '1.5rem' : '2.125rem',
+                }}
+              >
                 How can I help you today?
               </Typography>
-              <Typography variant="body1" sx={{ mb: 4, opacity: 0.7 }}>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  mb: 4, 
+                  opacity: 0.7,
+                  fontSize: isMobile ? '0.9rem' : '1rem',
+                }}
+              >
                 I'm here to assist you with questions, tasks, and conversations.
               </Typography>
               <SuggestedPrompts onPromptClick={handlePromptClick} />
@@ -308,24 +366,30 @@ export default function Chat() {
               ))}
               {isTyping && (
                 <Box
-                  sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}
+                  sx={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    gap: isMobile ? 0.5 : 1, 
+                    mb: 2,
+                    px: isMobile ? 1 : 0,
+                  }}
                 >
                   <Avatar
                     sx={{
                       bgcolor: "primary.main",
-                      width: 32,
-                      height: 32,
+                      width: isMobile ? 28 : 32,
+                      height: isMobile ? 28 : 32,
                     }}
                   >
-                    <BotIcon sx={{ fontSize: 18 }} />
+                    <BotIcon sx={{ fontSize: isMobile ? 16 : 18 }} />
                   </Avatar>
                   <Paper
                     elevation={1}
                     sx={{
-                      px: 2,
-                      py: 1.5,
+                      px: isMobile ? 1.5 : 2,
+                      py: isMobile ? 1 : 1.5,
                       bgcolor: "background.paper",
-                      borderRadius: 2,
+                      borderRadius: isMobile ? 1.5 : 2,
                       border: `1px solid ${theme.palette.divider}`,
                     }}
                   >
@@ -354,28 +418,32 @@ export default function Chat() {
           )}
         </Box>
 
-        {/* Fixed Input Bar */}
+        {/* Fixed Input Bar - Mobile Optimized */}
         <Paper
           elevation={2}
           sx={{
             position: "fixed",
-            bottom: 20,
+            bottom: isMobile ? 0 : 20,
             left: 0,
             right: 0,
             width: "100%",
-            maxWidth: "md",
+            maxWidth: isMobile ? "100%" : "md",
             mx: "auto",
-            p: 1,
+            p: isMobile ? 1 : 1,
             bgcolor: "background.paper",
             borderTop: `1px solid ${theme.palette.divider}`,
-            borderRadius: 50,
+            borderRadius: isMobile ? 0 : 50,
+            // Safe area padding for mobile
+            paddingBottom: isMobile ? "calc(1rem + env(safe-area-inset-bottom))" : "1rem",
+            // Prevent input zoom on mobile
+            fontSize: isMobile ? "16px" : "inherit",
           }}
         >
           <Box sx={{ display: "flex", alignItems: "flex-end", gap: 1 }}>
             <TextField
               fullWidth
               multiline
-              maxRows={4}
+              maxRows={isMobile ? 3 : 4}
               placeholder="Message ChatBot..."
               variant="standard"
               value={inputValue}
@@ -384,13 +452,20 @@ export default function Chat() {
               InputProps={{
                 disableUnderline: true,
                 sx: {
-                  px: 2,
+                  px: isMobile ? 1.5 : 2,
                   py: 1,
-                  fontSize: "1rem",
+                  fontSize: isMobile ? "16px" : "1rem", // Prevent zoom on iOS
                   display: "flex",
-                  alignItems: "center", // ✅ This centers the text vertically
-                  height: "48px", // ✅ Fixed height for consistent alignment
+                  alignItems: "center",
+                  minHeight: isMobile ? "44px" : "48px", // Touch target size
                 },
+              }}
+              // Prevent autocomplete/autocorrect on mobile
+              inputProps={{
+                autoComplete: "off",
+                autoCorrect: "off",
+                autoCapitalize: "off",
+                spellCheck: false,
               }}
             />
 
@@ -400,6 +475,8 @@ export default function Chat() {
               sx={{
                 bgcolor: inputValue.trim() ? "primary.main" : "action.disabled",
                 color: inputValue.trim() ? "#fff" : "text.disabled",
+                width: isMobile ? 44 : 48, // Touch target size
+                height: isMobile ? 44 : 48,
                 "&:hover": {
                   bgcolor: inputValue.trim()
                     ? "primary.dark"
@@ -408,7 +485,7 @@ export default function Chat() {
                 mb: 0.5,
               }}
             >
-              <SendIcon />
+              <SendIcon sx={{ fontSize: isMobile ? 20 : 24 }} />
             </IconButton>
           </Box>
         </Paper>

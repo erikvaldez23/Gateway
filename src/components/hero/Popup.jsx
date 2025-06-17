@@ -184,7 +184,7 @@ const AppleAIPopup = () => {
                   fontSize: "20px",
                   fontWeight: 600,
                   padding: "14px 24px",
-                  boxShadow: "0 4px 16px rgba(0, 122, 255, 0.3)",
+                  boxShadow: "0 4px 16px #1f3b70",
                   fontFamily:
                     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                   "&:hover": {

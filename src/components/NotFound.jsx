@@ -83,7 +83,7 @@ const NotFound = () => {
           {/* Image Section */}
           <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
             <img
-              src="/Commercial-Development/dog.jpeg"
+              src="/Gateway/dog.jpeg"
               alt="Funny Dog"
               style={{
                 maxWidth: "100%",

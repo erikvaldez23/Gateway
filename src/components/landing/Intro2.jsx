@@ -18,28 +18,28 @@ const featuredProjects = [
     description: 'Register your child or sign up to serve today!',
     type: 'EVENT',
     date: '20 JUNE 2023 – 01 NOVEMBER 2026',
-    image: '/Commercial-Development/intro2/summer-bash.jpg',
+    image: '/Gateway/intro2/summer-bash.jpg',
   },
   {
     title: "Stream Gateway Worship Espanol's Album",
     description: 'Listen to Eterno Dios and worship with us today!',
     type: 'ONLINE',
     date: 'JUNE 2024 - DECEMBER 2025',
-    image: '/Commercial-Development/intro2/spanish-album.jpg',
+    image: '/Gateway/intro2/spanish-album.jpg',
   },
   {
     title: 'Gateway YouthCON',
     description: 'Sign up for Gateway YouthCON!',
     type: 'EVENT',
     date: 'JUNE 2024 - DECEMBER 2025',
-    image: '/Commercial-Development/intro2/youth-con.jpg',
+    image: '/Gateway/intro2/youth-con.jpg',
   },
   {
     title: 'Single Parent Families',
     description: 'Get involved with our Single Parent Family Ministry and find community!',
     type: 'MINISTRY',
     date: 'JUNE 2024 - DECEMBER 2025',
-    image: '/Commercial-Development/intro2/single-parent.jpg',
+    image: '/Gateway/intro2/single-parent.jpg',
   }
 ];
 

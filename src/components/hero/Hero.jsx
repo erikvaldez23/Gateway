@@ -79,7 +79,7 @@ const ChurchHero = () => {
       zIndex: 0,
     }}
   >
-    <source src="/Commercial-Development/bg.mp4" type="video/mp4" />
+    <source src="/Gateway/bg.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
