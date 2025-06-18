@@ -30,10 +30,10 @@ return (
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    background: "url(/Gateway/bg.mp4)"
   }}
 >
-  {/* ✅ Background Video */}
-  <video
+  {/* <video
     autoPlay
     loop
     muted
@@ -50,7 +50,7 @@ return (
   >
     <source src="/Gateway/bg.mp4" type="video/mp4" />
     Your browser does not support the video tag.
-  </video>
+  </video> */}
 
   {/* ✅ Overlay (gradient filter over video) */}
   <Box
