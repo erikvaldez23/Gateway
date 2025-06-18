@@ -33,7 +33,7 @@ return (
       flexDirection: "column",
       justifyContent: "center",
       color: "white",
-      backgroundImage: `url(/Gateway/static-bg.jpg)`,
+      backgroundImage: `url(/Gateway/temp-bg2.jpg)`,
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
