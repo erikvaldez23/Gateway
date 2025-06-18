@@ -8,11 +8,16 @@ import {
   IconButton,
   Fade,
   Backdrop,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
 import { Close, AutoAwesome, Chat } from "@mui/icons-material";
 
+
 const AppleAIPopup = () => {
   const [open, setOpen] = useState(false);
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   useEffect(() => {
     // Show popup on first load
@@ -136,7 +141,7 @@ const AppleAIPopup = () => {
               variant="h4"
               sx={{
                 fontWeight: 600,
-                fontSize: '4rem',
+                fontSize: isMobile ? '2rem' : '4rem',
                 lineHeight: 1.2,
                 color: "#1d1d1f",
                 mb: 2,
@@ -151,7 +156,7 @@ const AppleAIPopup = () => {
             <Typography
               variant="body1"
               sx={{
-                fontSize: "1.8rem",
+                fontSize: isMobile ? "1.2rem" : "1.8rem",
                 lineHeight: 1.47,
                 color: "#000",
                 mb: 4,
@@ -181,7 +186,7 @@ const AppleAIPopup = () => {
                   color: "white",
                   borderRadius: "12px",
                   textTransform: "none",
-                  fontSize: "20px",
+                  fontSize: isMobile ? "15px" : "20px",
                   fontWeight: 600,
                   padding: "14px 24px",
                   boxShadow: "0 4px 16px #1f3b70",
@@ -202,7 +207,7 @@ const AppleAIPopup = () => {
                 sx={{
                   color: "#000",
                   textTransform: "none",
-                  fontSize: "20px",
+                  fontSize: isMobile ? "15px" : "20px",
                   fontWeight: 400,
                   padding: "8px 16px",
                   fontFamily:
