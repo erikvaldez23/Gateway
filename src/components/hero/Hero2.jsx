@@ -30,7 +30,7 @@ return (
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: "url(/Gateway/bg.mp4)"
+    background: "url(/Gateway/videos/bg.mp4)"
   }}
 >
   {/* <video
