@@ -25,32 +25,42 @@ import Video from "../../assets/bg.mp4"
 const Hero2 = () => {
 return (
 <Box
-  sx={{
-    position: 'relative',
-    height: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }}
->
-  <video
-    autoPlay
-    loop
-    muted
-    playsInline
-    style={{
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover',
-      top: 0,
-      left: 0,
-      zIndex: 0,
+    sx={{
+      position: "relative",
+      minHeight: "100vh",
+      overflow: "hidden",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      color: "white",
+      backgroundImage: `url(/Gateway/static-bg.jpg)`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
     }}
   >
-      <source src={Video} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+    {/* ✅ Video Background */}
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        zIndex: 0,
+      }}
+    >
+      <source
+        src={Video}
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
 
   {/* ✅ Overlay (gradient filter over video) */}
   <Box

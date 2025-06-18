@@ -342,7 +342,7 @@ const Topbar2 = () => {
                             top: "100%",
                             transform: "translateX(-50%)",
                             marginTop: 8,
-                            background: "rgba(255, 255, 255, 0.2)",
+                            background: "rgba(255, 255, 255, 0.1)",
                             backdropFilter: "blur(10px)",
                             borderRadius: 12,
                             minWidth: 220,
