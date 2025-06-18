@@ -87,7 +87,7 @@ const AppleAIPopup = () => {
               right: 16,
               top: 16,
               zIndex: 9999,
-              color: "#000",
+              color: "#fff",
               backgroundColor: "rgba(0, 0, 0, 0.2)",
               width: 32,
               height: 32,
@@ -130,7 +130,7 @@ const AppleAIPopup = () => {
                 <AutoAwesome
                   sx={{
                     fontSize: 36,
-                    color: "white",
+                    color: "#fff",
                   }}
                 />
               </Box>
@@ -143,7 +143,7 @@ const AppleAIPopup = () => {
                 fontWeight: 600,
                 fontSize: isMobile ? '2rem' : '4rem',
                 lineHeight: 1.2,
-                color: "#1d1d1f",
+                color: "#fff",
                 mb: 2,
                 fontFamily:
                   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
@@ -158,7 +158,7 @@ const AppleAIPopup = () => {
               sx={{
                 fontSize: isMobile ? "1.2rem" : "1.8rem",
                 lineHeight: 1.47,
-                color: "#000",
+                color: "#fff",
                 mb: 4,
                 fontWeight: 400,
                 fontFamily:
@@ -205,7 +205,7 @@ const AppleAIPopup = () => {
                 variant="text"
                 onClick={handleMaybeLater}
                 sx={{
-                  color: "#000",
+                  color: "#fff",
                   textTransform: "none",
                   fontSize: isMobile ? "15px" : "20px",
                   fontWeight: 400,
