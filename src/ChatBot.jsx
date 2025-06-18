@@ -23,7 +23,7 @@ export default function Chatbot({ open, onClose }) {
       setMessages([
         {
           sender: "bot",
-          text: "👋 Hi there! Welcome to Green Ark Investments. Ask me anything!",
+          text: "👋 Hi there! Welcome to Gateway. Ask me anything!",
         },
       ]);
     }
@@ -43,8 +43,8 @@ export default function Chatbot({ open, onClose }) {
     setTyping(true);
 
     try {
-      const { data } = await axios.post("https://tinttek-website.onrender.com/chat", {
-      // const { data } = await axios.post("http://localhost:5001/chat", {
+      // const { data } = await axios.post("https://tinttek-website.onrender.com/chat", {
+      const { data } = await axios.post("http://localhost:5001/chat", {
         message: input,
       });
 
