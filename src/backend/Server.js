@@ -14,7 +14,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const generateAIResponse = async (userMessage) => {
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o", // Use GPT-4o for better speed and accuracy
+      model: "gpt-4o",
       messages: [
         {
           role: "system",
@@ -26,7 +26,7 @@ const generateAIResponse = async (userMessage) => {
         },
       ],
       max_tokens: 300,
-      temperature: 0.7, // Add a bit of creativity, Grok-style
+      temperature: 0.7,
     });
 
     return completion.choices[0].message.content.trim();

@@ -316,7 +316,7 @@ const Topbar2 = () => {
                     {item.hasDropdown && (
                       <ArrowDropDownIcon
                         sx={{
-                          fontSize: "1.2rem",
+                          fontSize: "1rem",
                           ml: 0.5,
                           transform:
                             hoveredMenu === item.label
@@ -358,7 +358,7 @@ const Topbar2 = () => {
                               sx={{
                                 color: "#fff",
                                 fontWeight: 400,
-                                fontSize: "1.3rem",
+                                fontSize: "1.1rem",
                                 py: 1.5,
                                 px: 2,
                                 borderBottom:

@@ -76,6 +76,7 @@ const ChatMessage = ({ message, isUser, timestamp }) => {
           <Avatar
             sx={{
               bgcolor: theme.palette.primary.main,
+              color: "#fff",
               width: isMobile ? 28 : 32,
               height: isMobile ? 28 : 32,
               mt: 0.5,
@@ -127,6 +128,7 @@ const ChatMessage = ({ message, isUser, timestamp }) => {
           <Avatar
             sx={{
               bgcolor: theme.palette.grey[600],
+              color: "#fff",
               width: isMobile ? 28 : 32,
               height: isMobile ? 28 : 32,
               mt: 0.5,
@@ -296,7 +298,6 @@ const getBotResponse = async (input) => {
       <Box
         sx={{
           position: "relative",
-          height: "100vh",
           height: "100dvh",
           pt: isMobile ? 8 : 10,
           display: "flex",
@@ -492,7 +493,6 @@ const getBotResponse = async (input) => {
                     ? "primary.dark"
                     : "action.disabled",
                 },
-                mb: 0.5,
               }}
             >
               <SendIcon sx={{ fontSize: isMobile ? 20 : 24 }} />

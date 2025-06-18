@@ -28,6 +28,7 @@ import Intro2 from "./components/landing/Intro2";
 import NotFound from "./components/NotFound";
 import Chat from "./components/sub-pages/Chat";
 import ScrollToTop from "./components/ScrollToTop";
+import Search from "./components/sub-pages/Search"
 
 // theme
 const theme = createTheme({
@@ -90,12 +91,13 @@ function AppRoutes({
           element={
             <>
               <Hero2 />
-              <Intro />
-              <Intro2 />
+              {/* <Intro /> */}
+              {/* <Intro2 /> */}
             </>
           }
         />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/search" element={<Search />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

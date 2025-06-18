@@ -1,10 +1,7 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import Topbar from "./global/Topbar";
-import Contact from "./global/Contact";
 import Footer from "./global/Footer";
-import CallToAction from "./global/CallToAction";
-import QuickLinks from "./global/QuickLinks";
 
 const NotFound = () => {
   return (
@@ -94,17 +91,6 @@ const NotFound = () => {
           </Box>
         </Box>
       </Box>
-
-
-      <Box>
-        <CallToAction />
-      </Box>
-      {/* Contact Section */}
-      <Box sx={{width: "100vw" }}>
-        <Contact />
-      </Box>
-
-      <QuickLinks />
     </Box>
   );
 };
