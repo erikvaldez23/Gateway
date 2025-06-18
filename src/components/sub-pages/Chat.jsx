@@ -225,49 +225,59 @@ export default function Chat() {
     }
   }, [isMobile]);
 
-  const handleSend = async () => {
-    if (!inputValue.trim()) return;
+const handleSend = async () => {
+  if (!inputValue.trim()) return;
 
-    const userMessage = {
-      id: Date.now(),
-      text: inputValue,
-      isUser: true,
-      timestamp: new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInputValue("");
-    setIsTyping(true);
-
-    // Simulate bot response
-    setTimeout(() => {
-      const botMessage = {
-        id: Date.now() + 1,
-        text: getBotResponse(inputValue),
-        isUser: false,
-        timestamp: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      };
-      setMessages((prev) => [...prev, botMessage]);
-      setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+  const userMessage = {
+    id: Date.now(),
+    text: inputValue,
+    isUser: true,
+    timestamp: new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
   };
 
-  const getBotResponse = (input) => {
-    const responses = [
-      "That's an interesting question! I'd be happy to help you explore that topic further.",
-      "I understand what you're asking. Let me provide you with a comprehensive answer.",
-      "Great question! Here's what I think about that...",
-      "I can definitely help you with that. Let me break it down for you.",
-      "That's a thoughtful inquiry. Based on my knowledge, here's my perspective...",
-    ];
-    return responses[Math.floor(Math.random() * responses.length)];
+  setMessages((prev) => [...prev, userMessage]);
+  setInputValue("");
+  setIsTyping(true);
+
+  // 🔄 Await real server response
+  const botText = await getBotResponse(userMessage.text);
+
+  const botMessage = {
+    id: Date.now() + 1,
+    text: botText,
+    isUser: false,
+    timestamp: new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
   };
+
+  setMessages((prev) => [...prev, botMessage]);
+  setIsTyping(false);
+};
+
+
+const getBotResponse = async (input) => {
+  try {
+    const response = await fetch("http://localhost:5001/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: input }),
+    });
+
+    const data = await response.json();
+    return data.reply;
+  } catch (error) {
+    console.error("❌ Error fetching bot response:", error);
+    return "Oops! I ran into a problem. Please try again later.";
+  }
+};
+
 
   const handlePromptClick = (prompt) => {
     setInputValue(prompt);
@@ -303,7 +313,7 @@ export default function Chat() {
             maxWidth: isMobile ? "100%" : "md",
             overflowY: "auto",
             px: isMobile ? 0 : 2,
-            pb: 2,
+            pb: 5,
             mb: isMobile ? 10 : 8, // More space for mobile keyboard
             // Momentum scrolling for iOS
             WebkitOverflowScrolling: "touch",
