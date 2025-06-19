@@ -19,6 +19,8 @@ import {
   ListItem,
   ListItemText,
   Divider,
+  Drawer,
+  Stack,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -27,6 +29,8 @@ import {
   Close as CloseIcon,
   ExpandLess,
   ExpandMore,
+  ChevronRight,
+  ArrowBack,
 } from "@mui/icons-material";
 // import logo from "../../../public/gateway-logo2.png";
 import logo from "../../../public/alt-logo.png";
@@ -39,6 +43,8 @@ const Topbar2 = () => {
   const [langAnchorEl, setLangAnchorEl] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMobileMenu, setExpandedMobileMenu] = useState(null);
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [scrolled, setScrolled] = useState(false);
@@ -51,7 +57,7 @@ const Topbar2 = () => {
     () => ({
       MINISTRIES: [
         "Gateway Kids",
-        "Gateway Students",
+        "Gateway Students", 
         "Young Adults",
         "Gateway Women",
         "Gateway Men",
@@ -123,6 +129,8 @@ const Topbar2 = () => {
   useEffect(() => {
     setMobileMenuOpen(false);
     setExpandedMobileMenu(null);
+    setMobileSubmenuOpen(false);
+    setActiveSubmenu(null);
   }, [location.pathname]);
 
   // Prevent scroll when mobile menu is open
@@ -163,16 +171,24 @@ const Topbar2 = () => {
 
   const toggleMobileMenu = useCallback(() => {
     setMobileMenuOpen((prev) => !prev);
-  }, []);
+    if (mobileSubmenuOpen) {
+      setMobileSubmenuOpen(false);
+      setActiveSubmenu(null);
+    }
+  }, [mobileSubmenuOpen]);
 
   const handleMobileMenuItemClick = useCallback((item) => {
     if (item.hasDropdown) {
-      setExpandedMobileMenu((prev) =>
-        prev === item.label ? null : item.label
-      );
+      setMobileSubmenuOpen(true);
+      setActiveSubmenu(item.label);
     } else {
       setMobileMenuOpen(false);
     }
+  }, []);
+
+  const handleBackToMainMenu = useCallback(() => {
+    setMobileSubmenuOpen(false);
+    setActiveSubmenu(null);
   }, []);
 
   const isActiveRoute = useCallback(
@@ -228,28 +244,6 @@ const Topbar2 = () => {
                   },
                 }}
               />
-              {/* <Box sx={{ lineHeight: 1, color: "white" }}>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: 800,
-                    fontSize: { xs: "1.2rem", md: "1.5rem" },
-                    letterSpacing: "0.5px",
-                  }}
-                >
-                  Gateway
-                </Typography>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: 400,
-                    fontSize: { xs: "1.2rem", md: "1.5rem" },
-                    letterSpacing: "0.5px",
-                  }}
-                >
-                  Church
-                </Typography>
-              </Box> */}
             </Link>
           </Box>
 
@@ -403,29 +397,6 @@ const Topbar2 = () => {
               <SearchIcon />
             </IconButton>
 
-            {/* Language Selector */}
-            {/* <Button
-              onClick={handleLangMenuOpen}
-              sx={{
-                color: "white",
-                fontSize: "0.9rem",
-                fontWeight: 600,
-                minWidth: "auto",
-                px: 2,
-                py: 0.5,
-                border: "1px solid rgba(255, 255, 255, 0.3)",
-                borderRadius: "20px",
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  borderColor: "rgba(255, 255, 255, 0.5)",
-                },
-                transition: "all 0.2s ease",
-              }}
-              aria-label="Language selector"
-            >
-              {currentLanguage}
-            </Button> */}
-
             <Menu
               anchorEl={langAnchorEl}
               open={Boolean(langAnchorEl)}
@@ -470,113 +441,285 @@ const Topbar2 = () => {
                 onClick={toggleMobileMenu}
                 sx={{
                   ml: 1,
+                  mt: -1,
+                  borderRadius: '12px',
+                  transition: 'all 0.2s ease',
                   "&:hover": {
                     backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    transform: 'scale(1.05)',
                   },
                 }}
                 aria-label="Toggle mobile menu"
               >
-                {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                <motion.div
+                  animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                >
+                  {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                </motion.div>
               </IconButton>
             )}
           </Box>
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobile && mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: "rgba(0, 0, 0, 0.95)",
-              backdropFilter: "blur(10px)",
-              zIndex: 1200,
-              paddingTop: 30,
+      {/* Apple-Style Mobile Menu */}
+      <Drawer
+        anchor="right"
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        PaperProps={{
+          sx: {
+            width: '100vw',
+            backgroundColor: 'rgba(28, 28, 30, 0.98)',
+            backdropFilter: 'blur(40px)',
+            WebkitBackdropFilter: 'blur(40px)',
+            border: 'none',
+            boxShadow: 'none',
+          },
+        }}
+        ModalProps={{
+          sx: {
+            '& .MuiBackdrop-root': {
+              backgroundColor: 'transparent',
+            },
+          },
+        }}
+        transitionDuration={300}
+      >
+        <Box
+          sx={{
+            height: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Header with close button */}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              p: 3,
+              pt: 6,
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
             }}
           >
-            <Container>
-              <List sx={{ py: 2 }}>
-                {menuItems.map((item) => (
-                  <React.Fragment key={item.label}>
-                    <ListItem
-                      button
-                      component={Link}
-                      to={item.path}
-                      onClick={() => handleMobileMenuItemClick(item)}
+            <Typography
+              variant="h6"
+              sx={{
+                color: 'white',
+                fontWeight: 600,
+                fontSize: '1rem',
+                letterSpacing: '0.5px',
+              }}
+            >
+              Menu
+            </Typography>
+            <IconButton
+              onClick={() => setMobileMenuOpen(false)}
+              sx={{
+                color: 'white',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '12px',
+                width: 40,
+                height: 40,
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  transform: 'scale(1.05)',
+                },
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <CloseIcon sx={{ fontSize: '1.2rem' }} />
+            </IconButton>
+          </Box>
+
+          {/* Main Menu Content */}
+          <Box sx={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
+            <AnimatePresence mode="wait">
+              {!mobileSubmenuOpen ? (
+                <motion.div
+                  key="main-menu"
+                  initial={{ x: 0 }}
+                  animate={{ x: 0 }}
+                  exit={{ x: -100 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  style={{ height: '100%', paddingTop: '24px' }}
+                >
+                  <Stack spacing={0} sx={{ px: 3 }}>
+                    {menuItems.map((item, index) => (
+                      <motion.div
+                        key={item.label}
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.4,
+                          delay: index * 0.1,
+                          ease: [0.25, 0.1, 0.25, 1],
+                        }}
+                      >
+                        <Box
+                          component={item.hasDropdown ? 'button' : Link}
+                          to={item.hasDropdown ? undefined : item.path}
+                          onClick={() => handleMobileMenuItemClick(item)}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: '100%',
+                            py: 3,
+                            px: 0,
+                            color: 'white',
+                            textDecoration: 'none',
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                            transition: 'all 0.2s ease',
+                            '&:hover': {
+                              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                              mx: -3,
+                              px: 3,
+                              borderRadius: '16px',
+                              borderBottom: '1px solid transparent',
+                            },
+                            '&:active': {
+                              transform: 'scale(0.98)',
+                            },
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: '0.8rem',
+                              fontWeight: isActiveRoute(item.path) ? 600 : 400,
+                              color: isActiveRoute(item.path) 
+                                ? '#007AFF' 
+                                : 'white',
+                              letterSpacing: '0.5px',
+                            }}
+                          >
+                            {item.label}
+                          </Typography>
+                          {item.hasDropdown && (
+                            <ChevronRight
+                              sx={{
+                                fontSize: '1.2rem',
+                                color: 'rgba(255, 255, 255, 0.6)',
+                              }}
+                            />
+                          )}
+                        </Box>
+                      </motion.div>
+                    ))}
+                  </Stack>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="submenu"
+                  initial={{ x: 100 }}
+                  animate={{ x: 0 }}
+                  exit={{ x: 100 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  style={{ height: '100%', paddingTop: '24px' }}
+                >
+                  {/* Submenu Header */}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      px: 3,
+                      pb: 3,
+                      borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                    }}
+                  >
+                    <IconButton
+                      onClick={handleBackToMainMenu}
                       sx={{
-                        color: "white",
-                        fontSize: "1.2rem",
-                        fontWeight: 500,
-                        py: 2,
-                        borderRadius: 2,
-                        mb: 1,
-                        "&:hover": {
-                          backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        color: '#007AFF',
+                        mr: 2,
+                        p: 1,
+                        '&:hover': {
+                          backgroundColor: 'rgba(0, 122, 255, 0.1)',
                         },
                       }}
                     >
-                      <ListItemText
-                        primary={item.label}
-                        primaryTypographyProps={{
-                          fontSize: "1.2rem",
-                          fontWeight: 500,
-                        }}
-                      />
-                      {item.hasDropdown &&
-                        (expandedMobileMenu === item.label ? (
-                          <ExpandLess />
-                        ) : (
-                          <ExpandMore />
-                        ))}
-                    </ListItem>
+                      <ArrowBack />
+                    </IconButton>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        color: 'white',
+                        fontWeight: 600,
+                        fontSize: '0.8rem',
+                        letterSpacing: '0.5px',
+                      }}
+                    >
+                      {activeSubmenu}
+                    </Typography>
+                  </Box>
 
-                    {item.hasDropdown && (
-                      <Collapse
-                        in={expandedMobileMenu === item.label}
-                        timeout="auto"
-                        unmountOnExit
+                  {/* Submenu Items */}
+                  <Stack spacing={0} sx={{ px: 3, pt: 3 }}>
+                    {activeSubmenu && dropdownItems[activeSubmenu]?.map((subItem, index) => (
+                      <motion.div
+                        key={subItem}
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.4,
+                          delay: index * 0.05,
+                          ease: [0.25, 0.1, 0.25, 1],
+                        }}
                       >
-                        <List component="div" disablePadding>
-                          {dropdownItems[item.label]?.map((subItem) => (
-                            <ListItem
-                              key={subItem}
-                              button
-                              sx={{
-                                pl: 4,
-                                color: "rgba(255, 255, 255, 0.8)",
-                                "&:hover": {
-                                  backgroundColor: "rgba(255, 255, 255, 0.05)",
-                                  color: "white",
-                                },
-                              }}
-                            >
-                              <ListItemText
-                                primary={subItem}
-                                primaryTypographyProps={{
-                                  fontSize: "1rem",
-                                }}
-                              />
-                            </ListItem>
-                          ))}
-                        </List>
-                      </Collapse>
-                    )}
-                  </React.Fragment>
-                ))}
-              </List>
-            </Container>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                        <Box
+                          component="button"
+                          onClick={() => setMobileMenuOpen(false)}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            width: '100%',
+                            py: 2.5,
+                            px: 0,
+                            color: 'rgba(255, 255, 255, 0.9)',
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                            transition: 'all 0.2s ease',
+                            '&:hover': {
+                              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                              mx: -3,
+                              px: 3,
+                              borderRadius: '12px',
+                              borderBottom: '1px solid transparent',
+                            },
+                            '&:active': {
+                              transform: 'scale(0.98)',
+                            },
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: '0.8rem',
+                              fontWeight: 400,
+                              letterSpacing: '0.3px',
+                            }}
+                          >
+                            {subItem}
+                          </Typography>
+                        </Box>
+                      </motion.div>
+                    ))}
+                  </Stack>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Box>
+        </Box>
+      </Drawer>
     </>
   );
 };
