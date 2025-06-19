@@ -28,7 +28,8 @@ import {
   ExpandLess,
   ExpandMore,
 } from "@mui/icons-material";
-import logo from "../../../public/gateway-logo2.png";
+// import logo from "../../../public/gateway-logo2.png";
+import logo from "../../../public/alt-logo.png";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -49,22 +50,18 @@ const Topbar2 = () => {
   const dropdownItems = useMemo(
     () => ({
       MINISTRIES: [
-        "Business Leaders",
-        "Gateway Espanol",
-        "Global Outreach",
-        "Jewish",
-        "Kids",
-        "Marriage",
-        "Men",
-        "Outreach",
-        "Primetime",
-        "Prison Ministry",
-        "Single Parent Families",
-        "Widows",
-        "Women",
-        "Worship",
+        "Gateway Kids",
+        "Gateway Students",
         "Young Adults",
-        "Youth",
+        "Gateway Women",
+        "Gateway Men",
+        "Preschool Academy",
+        "Connect U",
+        "re|engage",
+        "Griefshare",
+        "Foster Family",
+        "Embrace Grace",
+        "Made With Love",
       ],
       CONNECT: [
         "Growth Path",
@@ -86,9 +83,12 @@ const Topbar2 = () => {
       { label: "ABOUT", path: "/about" },
       { label: "WATCH", path: "/watch" },
       { label: "GIVE", path: "/give" },
-      { label: "LOCATIONS", path: "/locations" },
-      { label: "CONNECT", path: "/connect", hasDropdown: true },
-      { label: "MINISTRIES", path: "/ministries", hasDropdown: true },
+      { label: "CONNECT", path: "/connect", 
+        // hasDropdown: true 
+      },
+      { label: "MINISTRIES", path: "/ministries", 
+        hasDropdown: true 
+      },
       { label: "EVENTS", path: "/events" },
       { label: "CHAT", path: "/chat" },
     ],
@@ -204,7 +204,7 @@ const Topbar2 = () => {
           }}
         >
           {/* Logo */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2, mt: 2 }}>
             <Link
               to="/"
               style={{
@@ -219,7 +219,7 @@ const Topbar2 = () => {
                 src={logo}
                 alt="Gateway Church Logo"
                 sx={{
-                  height: { xs: 40, md: 60 },
+                  height: { xs: 60, md: 80 },
                   objectFit: "contain",
                   transition: "transform 0.2s ease",
                   "&:hover": {
@@ -227,7 +227,7 @@ const Topbar2 = () => {
                   },
                 }}
               />
-              <Box sx={{ lineHeight: 1, color: "white" }}>
+              {/* <Box sx={{ lineHeight: 1, color: "white" }}>
                 <Typography
                   variant="h6"
                   sx={{
@@ -248,7 +248,7 @@ const Topbar2 = () => {
                 >
                   Church
                 </Typography>
-              </Box>
+              </Box> */}
             </Link>
           </Box>
 
