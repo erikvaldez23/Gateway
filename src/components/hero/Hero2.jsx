@@ -45,7 +45,7 @@ const Hero2 = () => {
         touchAction: "manipulation",
       }}
     >
-      {/* ✅ Video Background - Responsive for all screen sizes */}
+      {/* ✅ Video Background - Improved responsive scaling to eliminate bars */}
       <Box
         component="iframe"
         src="https://player.vimeo.com/video/1049428980?h=d54979a596&background=1&autoplay=1&loop=1&muted=1&autopause=0&controls=0&playsinline=1"
@@ -56,10 +56,6 @@ const Hero2 = () => {
           position: "absolute",
           top: "50%",
           left: "50%",
-          width: "100vw",
-          height: "100vh",
-          minWidth: "100%",
-          minHeight: "100%",
           zIndex: 0,
           border: "none",
           outline: "none",
@@ -67,47 +63,54 @@ const Hero2 = () => {
           transform: "translate(-50%, -50%)",
           transformOrigin: "center center",
           
-          // Responsive scaling for different aspect ratios
-          "@media (max-aspect-ratio: 16/9)": {
-            width: "auto",
-            height: "100vh",
-            minWidth: "177.78vh", // 16:9 aspect ratio * 100vh
-          },
+          // Default: Cover the entire viewport with slight overscan to eliminate any potential gaps
+          width: "102vw",
+          height: "102vh",
+          
+          // For screens wider than 16:9 (landscape orientation)
+          // Video needs to be tall enough to cover full width
           "@media (min-aspect-ratio: 16/9)": {
-            width: "100vw",
-            height: "auto",
-            minHeight: "56.25vw", // 9:16 aspect ratio * 100vw
+            width: "102vw",
+            height: "calc(102vw * 9 / 16)", // Maintain 16:9 aspect ratio
+            minHeight: "102vh",
           },
           
-          // Mobile-specific optimizations
+          // For screens taller than 16:9 (portrait orientation)  
+          // Video needs to be wide enough to cover full height
+          "@media (max-aspect-ratio: 16/9)": {
+            width: "calc(102vh * 16 / 9)", // Maintain 16:9 aspect ratio
+            height: "102vh",
+            minWidth: "102vw",
+          },
+          
+          // Mobile devices - ensure full coverage
           "@media (max-width: 768px)": {
-            width: "100vw",
-            height: "100vh",
-            minWidth: "100vw",
-            minHeight: "100vh",
-            // Ensure video covers full mobile viewport
-            transform: "translate(-50%, -50%) scale(1.02)",
+            // Portrait mobile
+            "@media (orientation: portrait)": {
+              width: "calc(105vh * 16 / 9)", // Slightly more overscan for mobile
+              height: "105vh",
+              minWidth: "105vw",
+            },
+            // Landscape mobile
+            "@media (orientation: landscape)": {
+              width: "105vw",
+              height: "calc(105vw * 9 / 16)",
+              minHeight: "105vh",
+            },
           },
           
-          // Ultra-wide screen support
+          // Ultra-wide screens (21:9 and wider)
           "@media (min-aspect-ratio: 21/9)": {
-            width: "100vw",
-            height: "auto",
-            minHeight: "42.86vw", // 9:21 aspect ratio * 100vw
+            width: "102vw",
+            height: "calc(102vw * 9 / 16)",
+            minHeight: "102vh",
           },
           
-          // Portrait orientation support
-          "@media (orientation: portrait)": {
-            width: "auto",
-            height: "100vh",
-            minWidth: "177.78vh",
-          },
-          
-          // Landscape orientation support
-          "@media (orientation: landscape)": {
-            width: "100vw",
-            height: "auto",
-            minHeight: "56.25vw",
+          // Very tall screens (9:16 and taller - like rotated phones)
+          "@media (max-aspect-ratio: 9/16)": {
+            width: "calc(105vh * 16 / 9)",
+            height: "105vh",
+            minWidth: "105vw",
           },
         }}
       />
