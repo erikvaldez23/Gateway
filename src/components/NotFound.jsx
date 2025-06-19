@@ -67,7 +67,7 @@ const NotFound = () => {
                   backgroundColor: "#333",
                 },
               }}
-              href="/"
+              href="/Gateway/"
             >
               Back to main page
             </Button>
