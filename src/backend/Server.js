@@ -1,7 +1,6 @@
 require("dotenv").config({ path: require("path").resolve(__dirname, "../../.env") });
 const express = require("express");
 const cors = require("cors");
-const fs = require("fs");
 const { OpenAI } = require("openai");
 
 const app = express();
@@ -9,12 +8,15 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({
+  apiKey: process.env.XAI_API_KEY, // Update with Grok API key
+  baseURL: "https://api.x.ai/v1", // Set to Grok's API base URL
+});
 
 const generateAIResponse = async (userMessage) => {
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "grok-3",  // Use Grok model
       messages: [
         {
           role: "system",
@@ -35,7 +37,6 @@ const generateAIResponse = async (userMessage) => {
     return "Hmm... something broke. Try again later...";
   }
 };
-
 
 // ✅ Chat Endpoint
 app.post("/chat", async (req, res) => {
