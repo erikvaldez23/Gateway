@@ -26,6 +26,7 @@ import {
   Add as AddIcon,
   Menu as MenuIcon,
 } from "@mui/icons-material";
+import ReactMarkdown from "react-markdown";
 
 const darkTheme = createTheme({
   palette: {
@@ -58,7 +59,7 @@ const darkTheme = createTheme({
 
 const ChatMessage = ({ message, isUser, timestamp }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Fade in={true} timeout={300}>
@@ -102,22 +103,31 @@ const ChatMessage = ({ message, isUser, timestamp }) => {
             wordBreak: "break-word",
           }}
         >
-          <Typography 
-            variant="body1" 
-            sx={{ 
-              lineHeight: 1.5,
-              fontSize: isMobile ? '0.9em' : '1.2em',
+          <ReactMarkdown
+            components={{
+              p: ({ children }) => (
+                <Typography
+                  variant="body1"
+                  sx={{
+                    lineHeight: 1.5,
+                    fontSize: isMobile ? "0.9em" : "1.2em",
+                  }}
+                >
+                  {children}
+                </Typography>
+              ),
             }}
           >
             {message}
-          </Typography>
+          </ReactMarkdown>
+
           <Typography
             variant="caption"
             sx={{
               color: isUser ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.6)",
               mt: 0.5,
               display: "block",
-              fontSize: isMobile ? '0.7em' : '0.75em',
+              fontSize: isMobile ? "0.7em" : "0.75em",
             }}
           >
             {timestamp}
@@ -145,8 +155,8 @@ const ChatMessage = ({ message, isUser, timestamp }) => {
 
 const SuggestedPrompts = ({ onPromptClick }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const prompts = [
     "What can you help me with?",
     "When are services?",
@@ -158,11 +168,11 @@ const SuggestedPrompts = ({ onPromptClick }) => {
     <Box sx={{ mb: 3, px: isMobile ? 2 : 0 }}>
       <Typography
         variant={isMobile ? "h6" : "h6"}
-        sx={{ 
-          mb: 2, 
-          textAlign: "center", 
+        sx={{
+          mb: 2,
+          textAlign: "center",
           opacity: 0.8,
-          fontSize: isMobile ? '1.1em' : '1.25em',
+          fontSize: isMobile ? "1.1em" : "1.25em",
         }}
       >
         Try asking me about:
@@ -182,7 +192,7 @@ const SuggestedPrompts = ({ onPromptClick }) => {
             sx={{
               cursor: "pointer",
               fontSize: isMobile ? "0.8rem" : "1rem",
-              height: isMobile ? 32 : 'auto',
+              height: isMobile ? 32 : "auto",
               "& .MuiChip-label": {
                 px: isMobile ? 1 : 1.5,
                 py: isMobile ? 0.5 : 1,
@@ -205,7 +215,7 @@ export default function Chat() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -220,67 +230,66 @@ export default function Chat() {
     if (isMobile) {
       const viewport = document.querySelector("meta[name=viewport]");
       if (viewport) {
-        viewport.setAttribute("content", 
+        viewport.setAttribute(
+          "content",
           "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         );
       }
     }
   }, [isMobile]);
 
-const handleSend = async () => {
-  if (!inputValue.trim()) return;
+  const handleSend = async () => {
+    if (!inputValue.trim()) return;
 
-  const userMessage = {
-    id: Date.now(),
-    text: inputValue,
-    isUser: true,
-    timestamp: new Date().toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
+    const userMessage = {
+      id: Date.now(),
+      text: inputValue,
+      isUser: true,
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setInputValue("");
+    setIsTyping(true);
+
+    // 🔄 Await real server response
+    const botText = await getBotResponse(userMessage.text);
+
+    const botMessage = {
+      id: Date.now() + 1,
+      text: botText,
+      isUser: false,
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    };
+
+    setMessages((prev) => [...prev, botMessage]);
+    setIsTyping(false);
   };
 
-  setMessages((prev) => [...prev, userMessage]);
-  setInputValue("");
-  setIsTyping(true);
+  const getBotResponse = async (input) => {
+    try {
+      // const response = await fetch("http://localhost:5001/chat", {
+        const response = await fetch("https://gateway-h71t.onrender.com/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: input }),
+      });
 
-  // 🔄 Await real server response
-  const botText = await getBotResponse(userMessage.text);
-
-  const botMessage = {
-    id: Date.now() + 1,
-    text: botText,
-    isUser: false,
-    timestamp: new Date().toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
+      const data = await response.json();
+      return data.reply;
+    } catch (error) {
+      console.error("❌ Error fetching bot response:", error);
+      return "Oops! I ran into a problem. Please try again later.";
+    }
   };
-
-  setMessages((prev) => [...prev, botMessage]);
-  setIsTyping(false);
-};
-
-
-const getBotResponse = async (input) => {
-  try {
-    // const response = await fetch("http://localhost:5001/chat", {
-    const response = await fetch("https://gateway-h71t.onrender.com/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: input }),
-    });
-
-    const data = await response.json();
-    return data.reply;
-  } catch (error) {
-    console.error("❌ Error fetching bot response:", error);
-    return "Oops! I ran into a problem. Please try again later.";
-  }
-};
-
 
   const handlePromptClick = (prompt) => {
     setInputValue(prompt);
@@ -298,7 +307,8 @@ const getBotResponse = async (input) => {
       <CssBaseline />
       <Box
         sx={{
-           background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)',
+          background:
+            "linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)",
           position: "relative",
           height: "100dvh",
           pt: isMobile ? 8 : 10,
@@ -345,22 +355,22 @@ const getBotResponse = async (input) => {
               >
                 <BotIcon sx={{ fontSize: isMobile ? 24 : 32 }} />
               </Avatar>
-              <Typography 
-                variant={isMobile ? "h5" : "h4"} 
-                sx={{ 
-                  mb: 1, 
+              <Typography
+                variant={isMobile ? "h5" : "h4"}
+                sx={{
+                  mb: 1,
                   fontWeight: 600,
-                  fontSize: isMobile ? '1.5rem' : '2.125rem',
+                  fontSize: isMobile ? "1.5rem" : "2.125rem",
                 }}
               >
                 How can I help you today?
               </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  mb: 4, 
+              <Typography
+                variant="body1"
+                sx={{
+                  mb: 4,
                   opacity: 0.7,
-                  fontSize: isMobile ? '0.9rem' : '1rem',
+                  fontSize: isMobile ? "0.9rem" : "1rem",
                 }}
               >
                 I'm here to assist you with questions, tasks, and conversations.
@@ -379,10 +389,10 @@ const getBotResponse = async (input) => {
               ))}
               {isTyping && (
                 <Box
-                  sx={{ 
-                    display: "flex", 
-                    alignItems: "center", 
-                    gap: isMobile ? 0.5 : 1, 
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: isMobile ? 0.5 : 1,
                     mb: 2,
                     px: isMobile ? 1 : 0,
                   }}
@@ -447,7 +457,9 @@ const getBotResponse = async (input) => {
             borderTop: `1px solid ${theme.palette.divider}`,
             borderRadius: isMobile ? 50 : 50,
             // Safe area padding for mobile
-            paddingBottom: isMobile ? "calc(1rem + env(safe-area-inset-bottom))" : "1rem",
+            paddingBottom: isMobile
+              ? "calc(1rem + env(safe-area-inset-bottom))"
+              : "1rem",
             // Prevent input zoom on mobile
             fontSize: isMobile ? "16px" : "inherit",
           }}
