@@ -12,12 +12,14 @@ import {
   useTheme
 } from "@mui/material";
 import { Close, AutoAwesome, Chat } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 
 const AppleAIPopup = () => {
   const [open, setOpen] = useState(false);
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Show popup on first load
@@ -35,10 +37,8 @@ const AppleAIPopup = () => {
     sessionStorage.setItem("hasSeenAIPopup", "true");
   };
 
-  const handleAskQuestion = () => {
-    // Add your AI platform navigation logic here
-    console.log("Navigate to AI platform");
-    handleClose();
+   const handleAskQuestion = () => {
+    navigate('/chat'); // Navigate to /chat route
   };
 
   const handleMaybeLater = () => {

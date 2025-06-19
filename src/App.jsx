@@ -101,7 +101,7 @@ function AppRoutes({
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {!loading && location.pathname !== "/chat" && (
+      {/* {!loading && location.pathname !== "/chat" && (
         <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
       )}
 
@@ -128,7 +128,7 @@ function AppRoutes({
             <ChatIcon sx={{ fontSize: 28 }} />
           </IconButton>
         </Box>
-      )}
+      )} */}
 
       {location.pathname !== "/chat" && <Footer />}
     </>
