@@ -69,7 +69,7 @@ const AppleAIPopup = () => {
           elevation: 0,
           sx: {
             borderRadius: "20px",
-            background: "rgba(255, 255, 255, 0.3)", // less opacity
+            background: "rgba(255, 255, 255, 0.2)", // less opacity
             backdropFilter: "saturate(180%) blur(20px)", // saturation adds vibrancy
             WebkitBackdropFilter: "saturate(180%) blur(20px)",
             border: "1px solid rgba(255, 255, 255, 0.3)", // slightly bolder edge

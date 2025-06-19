@@ -1,7 +1,5 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import Topbar from "./global/Topbar";
-import Footer from "./global/Footer";
 
 const NotFound = () => {
   return (
@@ -13,8 +11,6 @@ const NotFound = () => {
         backgroundColor: "transparent",
       }}
     >
-      {/* <Topbar notFound={true} /> */}
-
       {/* Main 404 Section */}
       <Box
         sx={{
@@ -52,7 +48,7 @@ const NotFound = () => {
               404
             </Typography>
             <Typography variant="h3" sx={{ fontWeight: "bold", mb: 2 }}>
-              Oops! I may have chewed up the power cord.
+              Page not found!
             </Typography>
             <Typography variant="body1" sx={{ mb: 4, color: "#555" }}>
               Go back to our main page to continue your visit.
@@ -75,19 +71,6 @@ const NotFound = () => {
             >
               Back to main page
             </Button>
-          </Box>
-
-          {/* Image Section */}
-          <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
-            <img
-              src="/Gateway/dog.jpeg"
-              alt="Funny Dog"
-              style={{
-                maxWidth: "100%",
-                height: "auto",
-                objectFit: "contain",
-              }}
-            />
           </Box>
         </Box>
       </Box>

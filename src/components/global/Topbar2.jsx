@@ -58,7 +58,7 @@ const Topbar2 = () => {
         "Preschool Academy",
         "Connect U",
         "re|engage",
-        "Griefshare",
+        "Grief Share",
         "Foster Family",
         "Embrace Grace",
         "Made With Love",
@@ -83,12 +83,12 @@ const Topbar2 = () => {
       { label: "ABOUT", path: "/about" },
       { label: "SERMONS", path: "/sermons" },
       { label: "GIVE", path: "/give" },
-      { label: "CONNECT", path: "/connect", 
-        // hasDropdown: true 
+      {
+        label: "CONNECT",
+        path: "/connect",
+        // hasDropdown: true
       },
-      { label: "MINISTRIES", path: "/ministries", 
-        hasDropdown: true 
-      },
+      { label: "MINISTRIES", path: "/ministries", hasDropdown: true },
       { label: "CALENDAR", path: "/calendar" },
       { label: "BULLETIN", path: "/bulletin" },
       { label: "CHAT", path: "/chat" },
@@ -500,7 +500,7 @@ const Topbar2 = () => {
               backgroundColor: "rgba(0, 0, 0, 0.95)",
               backdropFilter: "blur(10px)",
               zIndex: 1200,
-              paddingTop: 80,
+              paddingTop: 30,
             }}
           >
             <Container>
@@ -509,6 +509,8 @@ const Topbar2 = () => {
                   <React.Fragment key={item.label}>
                     <ListItem
                       button
+                      component={Link}
+                      to={item.path}
                       onClick={() => handleMobileMenuItemClick(item)}
                       sx={{
                         color: "white",
