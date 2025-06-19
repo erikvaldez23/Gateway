@@ -81,7 +81,7 @@ const Topbar2 = () => {
   const menuItems = useMemo(
     () => [
       { label: "ABOUT", path: "/about" },
-      { label: "WATCH", path: "/watch" },
+      { label: "SERMONS", path: "/sermons" },
       { label: "GIVE", path: "/give" },
       { label: "CONNECT", path: "/connect", 
         // hasDropdown: true 
@@ -89,7 +89,8 @@ const Topbar2 = () => {
       { label: "MINISTRIES", path: "/ministries", 
         hasDropdown: true 
       },
-      { label: "EVENTS", path: "/events" },
+      { label: "CALENDAR", path: "/calendar" },
+      { label: "BULLETIN", path: "/bulletin" },
       { label: "CHAT", path: "/chat" },
     ],
     []
@@ -403,7 +404,7 @@ const Topbar2 = () => {
             </IconButton>
 
             {/* Language Selector */}
-            <Button
+            {/* <Button
               onClick={handleLangMenuOpen}
               sx={{
                 color: "white",
@@ -423,7 +424,7 @@ const Topbar2 = () => {
               aria-label="Language selector"
             >
               {currentLanguage}
-            </Button>
+            </Button> */}
 
             <Menu
               anchorEl={langAnchorEl}

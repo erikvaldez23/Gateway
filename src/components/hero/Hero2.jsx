@@ -133,7 +133,7 @@ const Hero2 = () => {
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Box
           sx={{
-            maxWidth: "800px",
+            maxWidth: "900px",
             pl: { xs: 0, md: 4 },
           }}
         >
@@ -148,10 +148,10 @@ const Hero2 = () => {
               textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
             }}
           >
-            Reflect the present,
+            Connecting people
             <br />
-            <Box component="span" sx={{ fontStyle: "italic", opacity: 0.9 }}>
-              imagine the future
+            <Box component="span" sx={{ opacity: 0.9 }}>
+            to god
             </Box>
           </Typography>
 

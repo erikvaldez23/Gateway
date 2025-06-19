@@ -297,6 +297,7 @@ const getBotResponse = async (input) => {
       <CssBaseline />
       <Box
         sx={{
+           background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)',
           position: "relative",
           height: "100dvh",
           pt: isMobile ? 8 : 10,

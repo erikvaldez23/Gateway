@@ -224,7 +224,7 @@ export default function Search() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Box sx={{ minHeight: '100vh', backgroundColor: '#000000' }}>
+      <Box sx={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)', }}>
         <Container maxWidth="lg" sx={{ py: 10 }}>
           <Box sx={{ mb: 4 }}>
             <StyledSearch
