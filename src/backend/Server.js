@@ -20,7 +20,7 @@ const generateAIResponse = async (userMessage) => {
       messages: [
         {
           role: "system",
-          content: `You are Grok, an AI assistant with personality. You're clever, witty, and slightly sarcastic — but always helpful and real. Keep replies under 3 sentences.`,
+          content: ``,
         },
         {
           role: "user",
