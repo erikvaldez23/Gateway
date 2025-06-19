@@ -121,7 +121,7 @@ const ChatMessage = ({ message, isUser, timestamp }) => {
             {message}
           </ReactMarkdown>
 
-          <Typography
+          <Typography 
             variant="caption"
             sx={{
               color: isUser ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.6)",
@@ -487,10 +487,10 @@ export default function Chat() {
               }}
               // Prevent autocomplete/autocorrect on mobile
               inputProps={{
-                autoComplete: "off",
-                autoCorrect: "off",
-                autoCapitalize: "off",
-                spellCheck: false,
+                autoComplete: "on",
+                autoCorrect: "on",
+                autoCapitalize: "sentences",
+                spellCheck: true,
               }}
             />
 
