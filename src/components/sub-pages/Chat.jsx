@@ -264,8 +264,8 @@ const handleSend = async () => {
 
 const getBotResponse = async (input) => {
   try {
-    const response = await fetch("http://localhost:5001/chat", {
-    // const response = await fetch("https://gateway-h71t.onrender.com/chat", {
+    // const response = await fetch("http://localhost:5001/chat", {
+    const response = await fetch("https://gateway-h71t.onrender.com/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
