@@ -68,11 +68,11 @@ const AppleAIPopup = () => {
         PaperProps={{
           elevation: 0,
           sx: {
-            borderRadius: "20px",
-            background: "rgba(255, 255, 255, 0.2)", // less opacity
-            backdropFilter: "saturate(180%) blur(20px)", // saturation adds vibrancy
+            borderRadius: "30px",
+            background: "rgba(255, 255, 255, 0.2)", 
+            backdropFilter: "saturate(180%) blur(20px)", 
             WebkitBackdropFilter: "saturate(180%) blur(20px)",
-            border: "1px solid rgba(255, 255, 255, 0.3)", // slightly bolder edge
+            border: "1px solid rgba(255, 255, 255, 0.3)", 
             boxShadow: "0 16px 40px rgba(0, 0, 0, 0.15)",
             overflow: "visible",
           },
